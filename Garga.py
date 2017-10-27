@@ -106,7 +106,7 @@ def check_answer(my_input,debut):
     #    print_not_understanding()
 
     print()
-    print(garga_out)
+
     return garga_out
 
 def check_salutations(my_input,debut):
