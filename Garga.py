@@ -144,7 +144,7 @@ def check_how_is_it(my_input):
                     print(" mec",end='')
                 print('.')
             elif garga_humeur=="Déprimé":
-                print(garga_is_normal[randint(0,len(garga_is_normal)-1)]+'.')
+                print(garga_is_depressed[randint(0,len(garga_is_normal)-1)]+'.')
     return flag
 
 def check_adieux(my_input,debut):
