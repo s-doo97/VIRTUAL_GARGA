@@ -9,10 +9,17 @@ from PIL import Image
 from random import randint
 from time import sleep
 
+import Sel
+
+sel = Sel.Sel()
+
 garga_out = False
 
 garga_humor_lists = ["Normal","Déprimé"]
-garga_humeur = garga_humor_lists[randint(0,len(garga_humor_lists)-1)]
+#garga_humeur = garga_humor_lists[randint(0,len(garga_humor_lists)-1)]
+garga_humeur = "Déprimé"
+if garga_humeur == "Déprimé":
+	sel.sel = 3
 
 garga_salutations = ["Bonjour","Salut","Hello","Hey"]
 garga_adieux = ["Salut","Au revoir", "Bye", "À la prochaine"]
@@ -29,6 +36,9 @@ how_is_it_vocabulary = ["Ça va","ca va","sa va","Tu vas bien","Tu va bien","Com
                         "Comment allez-vous","Bien ou quoi"]
 
 sujets_facheux = ["Juliette","Noemie","Noëmie","Noémie","Gargamelette","Pote à la compote"]
+
+good_talking = ["cs", "counter-strike", "biere", "bière"]
+
 
 def clear_screen():
     """Nettoie l'écran."""
@@ -93,7 +103,8 @@ def check_answer(my_input,debut):
     garga_out = 0
     understand = False
 
-    garga_out = check_sujets_facheux(my_input)
+    if check_sujets_facheux(my_input):
+    	sel.sel += 10
 
     understand = check_salutations(my_input,debut)
 
@@ -106,6 +117,10 @@ def check_answer(my_input,debut):
     #    print_not_understanding()
 
     print()
+    print("Taux de sel: ", sel)
+    if sel.sel >= sel.sel_max:
+    	garga_out = True
+    	show_all_right()
 
     return garga_out
 
@@ -178,14 +193,13 @@ def check_sujets_facheux(my_input):
         sujets_facheux[i].lower() in my_input or \
         sujets_facheux[i].upper() in my_input) and flag == 0:
             flag = 1
-            show_all_right()
-            print()
     return flag
 
 
 def print_not_understanding():
     """Impression dans le cas où l'analyse des entrées de l'utilisateur ne
-    ne correspond à rien."""
+    ne correspant à rien."""
+    sel.sel += 1
     print(garga_not_understanding[randint(0,len(garga_not_understanding)-1)]+\
     " (Tu devrais peut-être appendre à écrire...)")
     print()
