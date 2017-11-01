@@ -21,7 +21,7 @@ if __name__ == "__main__":
     sleep(0.5)
     print("-> ", end = "")
     garga_out = garga.check_answer("salut",debut)
-    sleep(2)
+    sleep(1)
     debut=False
 
     checklist = ["ca va?", "cs", "au revoir"]
@@ -31,7 +31,7 @@ if __name__ == "__main__":
         sleep(0.5)
         print("-> ", end = "")
         garga_out = garga.check_answer(mots, debut)
-        sleep(2)
+        sleep(1)
 
     input("<ENTER> pour que Garga s'en aille")
 

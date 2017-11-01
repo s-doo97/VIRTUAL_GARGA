@@ -18,7 +18,7 @@ class Garga:
         self.garga_out = False
 
         self.garga_humor_lists = ["Normal","Déprimé"]
-        #self.garga_humeur = self.garga_humor_lists[randint(0,len(self.garga_humor_lists)-1)]
+        self.garga_humeur = self.garga_humor_lists[randint(0,len(self.garga_humor_lists)-1)]
         self.garga_humeur = "Déprimé"
         if self.garga_humeur == "Déprimé":
             self.sel.sel = 3
@@ -27,6 +27,7 @@ class Garga:
         self.garga_adieux = ["Salut","Au revoir", "Bye", "À la prochaine"]
         self.garga_not_understanding = ["J'ai pas compris...","Pas compris.","Hein ?", "Hein ?!", "Quoi mec ?","Excuse-moi ?",
                                     "Pardon ?", "Sorry ?"]
+        self.garga_jouissance = ["Trop bi1 mac!", "stylé", "swagg", "HHooo whaw, trop bon"]
 
         self.garga_is_normal = ["Ça va","Ça va, ça va", "Ouais", "Yep", "Oui", "Ouais t'inquiètes"]
         self.garga_is_depressed = ["Non...","Bof...","Mec, ma vie c'est de la merde...","Ma vie, c'est de la merde.",
@@ -108,7 +109,7 @@ class Garga:
         self.understand = False
 
         if self.check_sujets_facheux(my_input):
-            self.sel.sel += 10
+            self.sel.sel += 4
             self.understand = True
 
         elif self.check_salutations(my_input,debut):
@@ -120,8 +121,14 @@ class Garga:
         elif self.check_adieux(my_input,debut):
             self.garga_out = True
             self.understand = True
+
+        elif self.check_good_talking(my_input):
+            self.understand = True
+            self.sel.sel -= 1
+
         else:
             self.print_not_understanding()
+            self.sel.sel += 1
 
         print()
         print("Taux de sel: ", self.sel)
@@ -131,7 +138,17 @@ class Garga:
 
         return self.garga_out
 
-    def check_salutations(self, my_input,debut):
+    def check_good_talking(self, my_input):
+        """ Analyse de la présence d'un terme saluant
+        """
+        flag = False
+        for mot in self.good_talking:
+            if mot in my_input.lower():
+                flag = True
+                print(self.garga_jouissance[ randint(0, len(self.garga_jouissance)-1) ])
+        return flag
+
+    def check_salutations(self, my_input, debut):
         """Analyse de la présence d'un terme saluant."""
         flag = False
         for i in range(len(self.salutations_vocabulary)):
@@ -206,7 +223,6 @@ class Garga:
     def print_not_understanding(self):
         """Impression dans le cas où l'analyse des entrées de l'utilisateur ne
         ne correspant à rien."""
-        self.sel.sel += 1
         print(self.garga_not_understanding[randint(0,len(self.garga_not_understanding)-1)]+\
         " (Tu devrais peut-être appendre à écrire...)")
         print()
