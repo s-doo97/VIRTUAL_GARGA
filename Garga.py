@@ -21,7 +21,7 @@ class Garga:
         #self.garga_humeur = self.garga_humor_lists[randint(0,len(self.garga_humor_lists)-1)]
         self.garga_humeur = "Déprimé"
         if self.garga_humeur == "Déprimé":
-        	self.sel.sel = 3
+            self.sel.sel = 3
 
         self.garga_salutations = ["Bonjour","Salut","Hello","Hey"]
         self.garga_adieux = ["Salut","Au revoir", "Bye", "À la prochaine"]
@@ -108,23 +108,26 @@ class Garga:
         self.understand = False
 
         if self.check_sujets_facheux(my_input):
-        	self.sel.sel += 10
+            self.sel.sel += 10
+            self.understand = True
 
-        self.understand = self.check_salutations(my_input,debut)
+        elif self.check_salutations(my_input,debut):
+            self.understand = True
 
-        if not self.garga_out:
-            self.understand = self.check_how_is_it(my_input)
+        elif self.check_how_is_it(my_input):
+            self.understand = True
 
-        if not self.understand and not self.garga_out:
-            self.garga_out = self.check_adieux(my_input,debut)
-        #if not garga_out and not understand:
-        #    print_not_understanding()
+        elif self.check_adieux(my_input,debut):
+            self.garga_out = True
+            self.understand = True
+        else:
+            self.print_not_understanding()
 
         print()
         print("Taux de sel: ", self.sel)
         if self.sel.sel >= self.sel.sel_max:
-        	self.garga_out = True
-        	self.show_all_right()
+            self.garga_out = True
+            self.show_all_right()
 
         return self.garga_out
 

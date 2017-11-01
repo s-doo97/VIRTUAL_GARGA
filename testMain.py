@@ -33,7 +33,7 @@ if __name__ == "__main__":
         garga_out = garga.check_answer(mots, debut)
         sleep(2)
 
-    sleep(4)
+    input("<ENTER> pour que Garga s'en aille")
 
     garga.end(garga_out)
 
